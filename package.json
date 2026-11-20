@@ -1,0 +1,18 @@
+{
+  "name": "p2p-virtual-lan-by-sham",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Account-free browser P2P virtual LAN rooms for multiplayer gaming.",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "ws": "^8.18.0"
+  }
+}

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ms">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b1020" />
+    <meta name="description" content="Gaming multiplayer terus melalui virtual LAN peer-to-peer tanpa akaun." />
+    <title>P2P Virtual LAN by Sham</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="P2P Virtual LAN by Sham home">
+          <span class="brand-mark"><span></span><span></span><span></span></span>
+          <span class="brand-copy"><strong>P2P VIRTUAL LAN</strong><small>by sham</small></span>
+        </a>
+        <div class="topbar-status"><span class="pulse-dot"></span><span>NO ACCOUNT · NO FRICTION</span></div>
+      </header>
+
+      <section id="lobby-screen" class="screen lobby-screen" aria-labelledby="lobby-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span>DIRECT PLAY / 001</p>
+          <h1 id="lobby-title">Main bersama,<br /><em>terus connect.</em></h1>
+          <p class="hero-lede">Bina bilik LAN dalam beberapa saat. Tiada akaun, tiada borang panjang — hanya nickname, kod bilik dan sambungan peer-to-peer.</p>
+          <div class="feature-strip" aria-label="Ciri utama">
+            <span><b>01</b> Instant rooms</span>
+            <span><b>02</b> WebRTC direct</span>
+            <span><b>03</b> Built for play</span>
+          </div>
+        </div>
+
+        <div class="entry-card card-surface">
+          <div class="card-kicker"><span class="signal-bars"><i></i><i></i><i></i></span> START A SESSION</div>
+          <label class="field-label" for="nickname">NICKNAME SEMENTARA</label>
+          <input id="nickname" class="text-input" maxlength="20" autocomplete="nickname" placeholder="contoh: ShamRunner" />
+          <p class="field-hint">2–20 aksara · tidak perlu daftar akaun</p>
+          <div class="action-stack">
+            <button id="create-room" class="button button-primary" type="button"><span class="button-icon">＋</span> Cipta bilik baru <span class="button-arrow">↗</span></button>
+            <div class="divider"><span>ATAU JOIN DENGAN KOD</span></div>
+            <div class="join-row">
+              <input id="room-code" class="text-input code-input" maxlength="6" autocapitalize="characters" placeholder="ABCD" aria-label="Kod bilik" />
+              <button id="join-room" class="button button-secondary" type="button">Sertai <span class="button-arrow">↗</span></button>
+            </div>
+          </div>
+          <div id="entry-error" class="inline-message error" role="alert" hidden></div>
+          <div class="privacy-note"><span class="lock-icon">⌁</span><span><strong>Private by default.</strong> Bilik ini hidup sementara dalam memori. Data game dihantar terus antara pemain.</span></div>
+        </div>
+      </section>
+
+      <section id="room-screen" class="screen room-screen" aria-labelledby="room-title" hidden>
+        <div class="room-heading">
+          <div>
+            <p class="eyebrow"><span class="eyebrow-line"></span>LIVE SESSION / <span id="room-role-label">HOST</span></p>
+            <h1 id="room-title">Bilik anda <em>sudah siap.</em></h1>
+          </div>
+          <div class="room-actions">
+            <button id="copy-room" class="button button-ghost" type="button"><span class="copy-icon">▣</span> Salin kod</button>
+            <button id="leave-room" class="button button-danger" type="button">Keluar bilik</button>
+          </div>
+        </div>
+
+        <div class="room-grid">
+          <aside class="room-sidebar card-surface">
+            <div class="room-code-label">ROOM CODE</div>
+            <div class="room-code-display"><span id="room-code-display">----</span><span class="room-live-dot"></span></div>
+            <p class="room-code-help">Kongsi kod ini dengan squad anda. Maksimum 8 pemain untuk sesi ini.</p>
+            <div class="share-chip"><span class="share-chip-icon">↗</span><span id="share-text">Kod disalin?</span></div>
+            <div class="sidebar-rule"></div>
+            <div class="micro-stat"><span>SESSION</span><strong id="session-timer">00:00</strong></div>
+            <div class="micro-stat"><span>TRANSPORT</span><strong>WebRTC / P2P</strong></div>
+            <div class="micro-stat"><span>AUTH</span><strong class="lime-text">BYPASSED</strong></div>
+          </aside>
+
+          <div class="room-main">
+            <div class="players-card card-surface">
+              <div class="panel-heading"><div><span class="section-number">01</span><h2>Squad dalam bilik</h2></div><span id="player-count" class="count-badge">0 / 8</span></div>
+              <div id="players-list" class="players-list"></div>
+              <div class="panel-footer"><span class="live-indicator"><span class="pulse-dot"></span> LIVE ROSTER</span><span>Updates automatically</span></div>
+            </div>
+
+            <div class="connection-card card-surface">
+              <div class="panel-heading"><div><span class="section-number">02</span><h2>Direct link monitor</h2></div><span id="overall-status" class="status-pill status-waiting">WAITING</span></div>
+              <div class="monitor-body">
+                <div class="network-visual" aria-hidden="true"><div class="network-node node-you"><span>YOU</span></div><div class="network-line"><i></i><i></i><i></i></div><div class="network-node node-peers"><span id="network-peer-count">0</span><small>PEERS</small></div></div>
+                <div class="monitor-copy"><p id="connection-headline">Menunggu pemain lain menyertai.</p><p id="connection-detail">Apabila mereka masuk, sambungan WebRTC akan dinegosiasikan terus dari browser ke browser.</p><button id="ping-all" class="button button-primary small-button" type="button"><span>⌁</span> Uji sambungan</button></div>
+              </div>
+              <div id="activity-log" class="activity-log" aria-live="polite"><div class="log-line"><span>NOW</span><span>Bilik sedia. Share kod untuk mula.</span></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer"><span>P2P VIRTUAL LAN / SHAM LABS</span><span>EPHEMERAL ROOMS · DIRECT DATA · 2026</span></footer>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
