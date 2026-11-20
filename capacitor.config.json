@@ -1,0 +1,9 @@
+{
+  "appId": "com.sham.p2pvirtualan",
+  "appName": "P2P Virtual LAN by Sham",
+  "webDir": "public",
+  "server": {
+    "url": "https://8328-i0co14ylwk5vj354rcvax-40e46cf4.sg2.manus.computer",
+    "cleartext": false
+  }
+}

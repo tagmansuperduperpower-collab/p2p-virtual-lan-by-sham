@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">P2P Virtual LAN by Sham</string>
+    <string name="title_activity_main">P2P Virtual LAN by Sham</string>
+    <string name="package_name">com.sham.p2pvirtualan</string>
+    <string name="custom_url_scheme">com.sham.p2pvirtualan</string>
+</resources>
